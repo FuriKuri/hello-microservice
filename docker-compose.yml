@@ -1,0 +1,24 @@
+eureka:
+  build: ./micro-eureka
+  ports:
+    - "8761:8761"
+book:
+  build: ./micro-book
+  links:
+   - eureka
+user:
+  build: ./micro-user
+  links:
+   - eureka
+zuul:
+  build: ./micro-zuul
+  links:
+   - eureka
+  ports:
+    - "8080:8080"
+turbine:
+  build: ./micro-turbine
+  links:
+   - eureka
+  ports:
+    - "8989:8989"
