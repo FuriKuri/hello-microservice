@@ -1,3 +1,25 @@
+elasticsearch:
+  image: elasticsearch
+  command: elasticsearch -Des.network.host=0.0.0.0
+  ports:
+   - "9200:9200"
+   - "9300:9300"
+  volumes:
+  - /data:/usr/share/elasticsearch/data
+kibana:
+  image: kibana
+  ports:
+   - "5601:5601"
+  links:
+   - elasticsearch
+logstash:
+  build: ./micro-logstash
+  command: logstash --config /conf
+  hostname: logstash
+  ports:
+   - "5000:5000"
+  links:
+   - elasticsearch
 eureka:
   build: ./micro-eureka
   ports:
@@ -6,6 +28,7 @@ book:
   build: ./micro-book
   links:
    - eureka
+   - logstash
 user:
   build: ./micro-user
   links:
