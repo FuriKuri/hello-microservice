@@ -15,7 +15,7 @@ logging:
   level:
     ROOT: INFO
     org.springframework.web: DEBUG
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
 ribbon:
   ConnectTimeout: 5000
   ReadTimeout: 5000
